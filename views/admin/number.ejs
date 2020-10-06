@@ -1,0 +1,76 @@
+<%- include('../adminInclude/header.ejs')%>
+<link rel="stylesheet" href="/css/forms.css">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/product.css">
+</head>
+
+<style>
+    h2 {
+        color: red;
+        text-align: center;
+        font-size: 22px;
+    }
+
+    .row {
+        padding: 1rem
+    }
+
+    .form-inline {
+        /* margin-left: .5rem; */
+    }
+</style>
+
+<body id="page-top">
+    <div id="wrapper">
+        <%- include('../adminInclude/sidenav.ejs') %>
+        <%- include('../adminInclude/topnav.ejs') %>
+
+
+        <%if(results.length>0){ %>
+        <h2 class="p-3">Account Details(আপনি এখান থেকে আপনার অ্যাকাউন্ট ডিটেইলস চেঞ্জ করতে পারবেন) </h2>
+        <hr>
+        <div class="container ">
+            <% for (let sell of results){%>
+
+            <div class="card p-4">
+                <form action="/currency/admin/accountnumber" method="post">
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="name">
+                                    <%=sell.accountname %>  Account
+
+                                </label>
+                            <input type="text" class="form-control" id="" name="number" value="<%=sell.number%>">
+                        </div>
+                       
+                    </div>
+                    <br>
+                    <input type="hidden" name="_csrf" value="<%= csrfTokenss  %>">
+                    <input type="hidden" name="rateId" value="<%=sell._id%>">
+                    <input type="hidden" class="form-control" name="accountname" id="staticEmail2"
+                        value="<%=sell.accountname%>">
+                
+
+                    <button type="submit" class="btn btn-primary mb-2">Update</button>
+                </form>
+            </div>
+            <br>
+            <br>
+            <%}%>
+            
+
+
+        </div>
+      
+     
+        <%}else{%>
+            <h2 class="p-3">Not Found </h2>
+
+            <%}%>
+
+        
+
+
+        <%- include('../adminInclude/footer.ejs') %>

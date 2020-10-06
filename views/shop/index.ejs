@@ -1,0 +1,320 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/product.css">
+<link rel="stylesheet" href="/css/head.css">
+
+</head>
+<style>
+    .notis p {
+        margin-top: 1rem;
+    }
+ .main-header__nav li span{
+
+    position: initial ;
+  }
+
+
+    .notis {
+        margin-bottom: 15px !important;
+        padding: 4px 12px !important;
+
+        background-color: #ffdddd;
+        border-left: 6px solid #f44336;
+
+    }
+
+    .st {
+        color: #fd4 !important;
+    }
+</style>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+
+    <div class="container">
+
+
+        <div class="landing" style="  font-family: 'Grandstander', cursive !important; ">
+            <div class="landingText">
+                <h1>Exchange <span> Your <br> Money</span></h1>
+                
+                <h3>You can exchange your money from us, we will give you .<br> good service from here you can buy dollars for you easily and you
+                can sell..</h3>
+
+            </div>
+            <div class="landingImage">
+                <img src="/img/currency-symbol-exchange-rate.png" alt="">
+            </div>
+        </div>
+
+        <div class="danger">
+            <div class="notis">
+
+                <p><strong>Notis!</strong>Please Registration To Exchange Your Money...</p>
+            </div>
+        </div>
+        <br>
+
+
+        <div class="supportcart">
+            <h2>Supported <span style="color: aqua;">Card</span> </h2>
+            <br><br>
+            <hr>
+            <div class=" col-md-12 cardImages">
+
+
+
+
+                <img src="/img/neteller.png" alt="">
+                <img src="/img/nogod.png" alt="">
+                <img src="/img/pm.png" alt="">
+                <img src="/img/rocket.png" alt="">
+                <img src="/img/advcash.png" alt="">
+                <img src="/img/bkash.jpg" alt="">
+                <img src="/img/skrill.png" alt="">
+                <img src="/img/pm (2).png" alt="">
+                <img src="/img/webmoney (1).png" alt="">
+                <img src="/img/payeer (1).png" alt=""><img src="/img/pm (2).png.png" alt="">
+
+            </div>
+        </div>
+
+
+        <div class="about">
+
+            <div class="aboutText">
+                <h1>Why We Are <span style=" color: #2f8be0;
+  ">Best</span> </h1>
+                <img src="/img/bestdimage.png" alt="">
+            </div>
+            <div class="aboutlist">
+                <ol>
+                    <li><span>01</span>
+                        <p>Our order completed time max 10 min to 1 hour.</p>
+                    </li>
+                    <li><span>02</span>
+                        <p>Take Our Service 7 Days/Week day(No Weekend).</p>
+                    </li>
+                    <li><span>03</span>
+                        <p>You can Buy USD at low Cost.</p>
+                    </li>
+                    <li><span>04</span>
+                        <p>You can Sell USD at high Rate.</p>
+                    </li>
+                    <li><span>05</span>
+                        <p>We will not be responsible for anyone who uses our
+                            services for dollar trafficking, terrorist activities or others
+                            crimes. You are responsible for any misuse of the Site and/or Services even if it is by
+                        </p>
+                    </li>
+
+
+                </ol>
+
+            </div>
+        </div>
+
+
+        <div class="resently_exchanges">
+            <h2>Recently <span style="color: aqua;">Exchanges</span> </h2>
+            <hr>
+            <br>
+            <%if(result.length > 0 || results.length > 0 ){ %>
+            <div class="wrapper_exchange">
+                
+<% for(let exc of result){ %>
+<div class="card ">
+    <div class="images">
+
+        <img class="img1" <%if(exc.usdcardname == 'bk'){%> src="/img/bkash.jpg"
+            alt=""><%}else if(exc.usdcardname == 'sk'){%> src="/img/skrill.png" alt=""><%}
+                                                 else if(exc.usdcardname == 'no'){%> src="/img/nogod.png" alt=""><%}
+                                                else if(exc.usdcardname == 'rd'){%> src="/img/rocket.png" alt=""><%}
+                                                else if(exc.usdcardname == 'ne'){%> src="/img/neteller.png" alt=""><%}
+                                               else if(exc.usdcardname == 'pa'){%> src="/img/payeer.png" alt=""><%}%>  
+                                                <img class="img2" src="/img/exchange.jpg" alt="">
+                        
+                        
+                                                <img class="img3" <% if(exc.bdcardName == 'bk'){%>
+        src="/img/bkash.jpg" alt=""><%}
+                                                  else if(exc.bdcardName == 'sk'){%> src="/img/skrill.png" alt=""><%}
+                                                  else if(exc.bdcardName == 'no'){%> src="/img/nogod.png" alt=""><%}
+                                                  else if(exc.bdcardName == 'rd'){%> src="/img/rocket.png" alt=""><%}
+                                                  else if(exc.bdcardName == 'ne'){%> src="/img/neteller.png" alt=""><%}
+                                                  else if(exc.bdcardName == 'pa'){%> src="/img/payeer.png" alt=""><%}%>  
+                                              
+                        
+                                            </div>
+                        
+                                            <div class="taka" >
+                                                <span class="price"><%=exc.usdsend %> → <%=exc.tkrecive%> </span>
+
+
+
+        <% if(exc.condition == 'selling'){%>
+        <span class=" badge  badge-success ">SELL</span><%}else if(exc.condition == 'buying'){%>
+        <span class="badge  badge-info ">BUY</span><%}%>
+                        
+                                            </div>
+                                            <div class="date">
+                                                <span><%=exc.createdAt.toLocaleTimeString()  %>
+        <%=exc.createdAt.toLocaleDateString() %>
+        </span>
+        <% if(exc.status == 'pandding'){%> <span class="badge  badge-primary "><i
+                class="fa fa-refresh"></i>Pending</span><%}else if(exc.status == 'awaiting'){%>
+        <span class="badge  badge-danger "><i
+                class="fa fa-clock-o"></i>Awaiting</span><%}else if(exc.status == 'refunded'){%>
+        <span class="badge  badge-info "><i
+                class="fa fa-exclamation-triangle"></i>Refunded</span><%}else if(exc.status == 'completed'){%>
+        <span class="badge  badge-success "><i
+                class="fa fa-check"></i>Completed</span><%}else if(exc.status == 'cancelled'){%>
+        <span class="badge  badge-danger "><i class="fa fa-ban"></i>Cancelled</span><%}%>
+                        
+                        
+                                                
+                                            </div>
+            
+            
+            
+                            </div>
+                        <% } %>
+                 <% for(let exc of results){ %>
+                        <div class="card ">
+                            <div class="images">
+
+                                <img class="img1" <%if(exc.sentaccountname == 'bk'){%> src="/img/bkash.jpg"
+                                    alt=""><%}else if(exc.sentaccountname == 'sk'){%> src="/img/skrill.png" alt=""><%}
+                                                 else if(exc.sentaccountname == 'no'){%> src="/img/nogod.png" alt=""><%}
+                                                else if(exc.sentaccountname == 'rd'){%> src="/img/rocket.png" alt=""><%}
+                                                else if(exc.sentaccountname == 'ne'){%> src="/img/neteller.png" alt=""><%}
+                                               else if(exc.sentaccountname == 'pa'){%> src="/img/payeer.png" alt=""><%}%>  
+                                                <img class="img2" src="/img/exchange.jpg" alt="">
+                        
+                        
+                                                <img class="img3" <% if(exc.reciveusdName == 'bk'){%>
+                                src="/img/bkash.jpg" alt=""><%}
+                                                  else if(exc.reciveusdName == 'sk'){%> src="/img/skrill.png" alt=""><%}
+                                                  else if(exc.reciveusdName == 'no'){%> src="/img/nogod.png" alt=""><%}
+                                                  else if(exc.reciveusdName == 'rd'){%> src="/img/rocket.png" alt=""><%}
+                                                  else if(exc.reciveusdName == 'ne'){%> src="/img/neteller.png" alt=""><%}
+                                                  else if(exc.reciveusdName == 'pa'){%> src="/img/payeer.png" alt=""><%}%>  
+                                              
+                        
+                                            </div>
+                        
+                                            <div class="taka" >
+                                                <span class="price"><%=exc.senttk %> → <%=exc.reciveusd%> </span>
+
+
+
+                                <% if(exc.condition == 'selling'){%>
+                                <span class=" badge  badge-success ">SELL</span><%}else if(exc.condition == 'buying'){%>
+                                <span class="badge  badge-info ">BUY</span><%}%>
+                        
+                                            </div>
+                                            <div class="date">
+                                                <span><%=exc.createdAt.toLocaleTimeString()  %>
+                                <%=exc.createdAt.toLocaleDateString() %>
+                                </span>
+                                <% if(exc.status == 'pandding'){%> <span class="badge  badge-primary "><i
+                                        class="fa fa-refresh"></i>Pending</span><%}else if(exc.status == 'awaiting'){%>
+                                <span class="badge  badge-danger "><i
+                                        class="fa fa-clock-o"></i>Awaiting</span><%}else if(exc.status == 'refunded'){%>
+                                <span class="badge  badge-info "><i
+                                        class="fa fa-exclamation-triangle"></i>Refunded</span><%}else if(exc.status == 'completed'){%>
+                                <span class="badge  badge-success "><i
+                                        class="fa fa-check"></i>Completed</span><%}else if(exc.status == 'cancelled'){%>
+                                <span class="badge  badge-danger "><i class="fa fa-ban"></i>Cancelled</span><%}%>
+                        
+                        
+                                                
+                                            </div>
+            
+            
+            
+                            </div>
+                        <% } %>
+
+
+
+                            </div>
+
+                            <% }else{ %>
+                            <h3 style="color: tomato; text-align: center;">New Exchanges Not Found </h3>
+                            <% } %>
+                        </div>
+
+                        <div class="client_reviews">
+                            <h2>Client <span style="color: aqua;">Reviews</span> </h2>
+                            <hr>
+                            <br>
+                            <%if(rating.length>0){%>
+                            <div class="wrapper_review">
+                                <%for(let rat of rating){%>
+                                <div class="card">
+                                    <div class="rating">
+                                        <%if(rat.rating === 'rating-5'){%>
+
+                                        <span class="st  fa fa-star checked"></span>
+                                        <span class="st fa fa-star checked"></span>
+                                        <span class="st fa fa-star checked"></span>
+                                        <span class="st fa fa-star checked"></span>
+                                        <span class="st fa fa-star checked"></span>
+                                        <%} else if(rat.rating === 'rating-4'){%>
+
+                                        <span class="st  fa fa-star checked"></span>
+                                        <span class="st fa fa-star checked"></span>
+                                        <span class="st fa fa-star checked"></span>
+                                        <span class="st fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <%} else if(rat.rating === 'rating-3'){%>
+
+                                        <span class="st  fa fa-star checked"></span>
+                                        <span class="st fa fa-star checked"></span>
+                                        <span class="st fa fa-star checked"></span>
+                                        <span class=" fa fa-star checked"></span>
+                                        <span class=" fa fa-star checked"></span>
+                                        <%} else if(rat.rating === 'rating-2'){%>
+
+                                        <span class="st  fa fa-star checked"></span>
+                                        <span class="st fa fa-star checked"></span>
+                                        <span class=" fa fa-star checked"></span>
+                                        <span class=" fa fa-star checked"></span>
+                                        <span class=" fa fa-star checked"></span>
+                                        <%} else if(rat.rating === 'rating-1'){%>
+
+                                        <span class="st  fa fa-star checked"></span>
+                                        <span class=" fa fa-star checked"></span>
+                                        <span class=" fa fa-star checked"></span>
+                                        <span class="fa fa-star checked"></span>
+                                        <span class=" fa fa-star checked"></span>
+                                        <%}%>
+
+                            </div>
+
+                            <div class="taka">
+                                <p><%=rat.description%></p>
+
+
+                                    </div>
+                                    <div class="date">
+                                        <span><%=rat.createdAt.toLocaleDateString()%>
+                                            <%=rat.createdAt.toLocaleTimeString()%> </span>
+                                        <span class="user">-- <%=rat.username%></span>
+                                    </div>
+
+
+                                </div>
+                                <%}%>
+                       
+                    </div>
+                <%}else{%>
+                                <h2 style="text-align: center;">No Rating Found</h2>
+                                <%}%>
+                </div>
+
+
+
+            </div>
+
+
+            <%- include('../includes/end.ejs') %>

@@ -1,0 +1,82 @@
+<%- include('../adminInclude/header.ejs')%>
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/forms.css">
+<!-- <link rel="stylesheet" href="/css/product.css"> -->
+<script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
+
+
+<style>
+    .product__title{
+        font-size:medium;
+
+    }
+    h2{
+        text-align: center;
+        color: red;
+    }
+</style>
+</head>
+    <body id="page-top">
+        <div id="wrapper">
+    <%- include('../adminInclude/sidenav.ejs') %>
+    <%- include('../adminInclude/topnav.ejs') %>
+        <h2>Wrire Your About Pages</h2>
+<br>
+    <main>
+    <form class="product-form" action="/currency/admin/<%if(editing){%>edit-about<%}else{%>add-about<% } %>" method="POST">
+       
+                            <textarea class="form-control" name="title"></textarea>
+                            <script>
+                                CKEDITOR.replace('title');
+                            </script>
+
+            
+        <br>
+
+
+            <input type="hidden" name="_csrf" value="<%= csrfTokenss  %>">
+            <button class="btn btn-primary" id="create-cetagory" type="submit"><% if (editing) { %>Update About<% } else { %>Add About<% } %></button>
+        </form>
+    </main>
+
+    <% if (!editing) {%> 
+    <hr>
+  
+   
+    <main>
+
+        <% if (about.length > 0) { %>
+            <div class="grid">
+                <% for (let cat of about) { %>
+                    <article class="card product-item" style="margin-bottom: 3rem;">
+                        
+                        <header class="card__header">
+                            <h1 class="product__title">
+                                <%-cat.title %>
+                            </h1>
+                        </header>
+
+                        <div class="card__actions">
+                          
+                            <form action="/currency/admin/delete-about" method="POST">
+                                <input type="hidden" value="<%= cat._id %>" name="aboutId">
+                                <input type="hidden" name="_csrf" value="<%= csrfTokenss  %>">
+                                <button class="btn btn-danger" type="submit">Delete</button>
+                            </form>
+
+                        </div>
+                    </article>
+
+                  
+                    <% } %>
+                      
+            </div>
+                <% } else { %>
+                    <h1>No Products Found!</h1>
+                    <% } %>
+    </main>    
+
+            <% } %> 
+
+            <%- include('../adminInclude/footer.ejs') %>
+

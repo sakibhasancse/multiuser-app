@@ -1,0 +1,25 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/product.css">
+<link rel="stylesheet" href="/css/contact.css">
+
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <div class="container">
+
+        <h2 class="limitebuy">Privacy & Data Security </h2>
+        <hr>
+        <% if (about.length>0){ %>
+        <section id="about" class="about">
+            <% for(let p of about){ %>
+
+            <%-p.title%>
+            <br>
+            <% }%>
+        </section>
+        <% }else{%>
+        <p style="text-align: center;">Write Privacy Policy</p>
+        <% } %>
+    </div>
+    

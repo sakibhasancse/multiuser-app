@@ -1,0 +1,283 @@
+<%- include('../includes/head.ejs') %>
+<!-- <link rel="stylesheet" href="/css/product.css"> -->
+<link rel="stylesheet" href="/css/profile.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+</head>
+
+<style>
+    .conframordertable thead {
+        background: rgb(88, 87, 87);
+        color: white;
+    }
+
+    .conframordertable {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .conframorder td,
+    th,
+    .conframorder2 td,
+    th {
+        border: 1px solid #c4ccce;
+        text-align: left;
+        padding: 8px;
+    }
+
+    .conframorder tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    .conframorder2 tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+
+    <div class="container">
+
+        <%if (neworder.length > 0 || buyneworder.length > 0 ){%>
+        <div class="order">
+
+            <h2 style="text-align: center;">Confirm <span style="color: aqua; ">Your Order</span> </h2>
+            <p style="text-align: center;"> Please confirm your order click on the confirm button(কনফ্রাম বাটন এ ক্লিক
+                করুন) </p>
+            <br>
+            <table class="table tabilee">
+                <thead class="thead-dark">
+                    <tr>
+
+                        <th scope="col">Time</th>
+                        <th scope="col">Sent</th>
+                        <th scope="col">Recive</th>
+
+
+                        <th scope="col">Currency</th>
+
+
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(let order of neworder){%>
+                    <tr>
+
+                        <td><%=order.createdAt.toLocaleTimeString() %></td>
+
+                        <td><%=order.usdsend  %></td>
+                        <td><%=order.tkrecive %> </td>
+                        <td><% if(order.condition == 'selling'){%> <span class="badge  badge-primary ">SELL</span><%}
+                       else if(order.condition == 'buying'){%> <span class="badge  badge-info ">BUY</span><%}%></td>
+
+
+                        <td>
+
+                            <a href="/order/<%=order._id%>" type="button" style="padding: 4px; font-size: 12px;"
+                            class="btn btn-success">Confram</a>
+
+                        </td>
+                    </tr>
+                    <% }%>
+
+                    <% for(let order of buyneworder){%>
+                    <tr>
+
+                        <td><%=order.createdAt.toLocaleTimeString() %></td>
+
+                        <td><%=order.senttk  %></td>
+                        <td><%=order.reciveusd %> </td>
+                        <td><% if(order.condition == 'selling'){%> <span class="badge  badge-primary ">SELL</span><%}
+                                           else if(order.condition == 'buying'){%> <span
+                                class="badge  badge-info ">BUY</span><%}%></td>
+                    
+                    
+                                            <td>
+                    
+                                                <a href="/order/<%=order._id%>" type="button" style="padding: 4px;
+                            font-size: 12px;"
+                            class="btn btn-success">Confram</a>
+
+                        </td>
+                    </tr>
+                    <% }%>
+
+                </tbody>
+
+            </table>
+        </div>
+        <%}%>
+
+
+
+        <div class="orderStatus">
+            <h2>Order<span style="color: aqua;"> Process</span> </h2>
+            <hr>
+
+            <span class="badge  badge-primary "><i class="fa fa-refresh"></i>Pending</span> - When you put the order in
+            our website default order status show pending. <br>
+            <span class="badge  badge-danger "><i class="fa fa-clock-o"></i>Awaiting</span> - Your order process will
+            completed within few hours or more. <br>
+            <span class="badge  badge-info "><i class="fa fa-exclamation-triangle"></i>Refunded</span> - When you order
+            mistakenly, don't want to continue it then your order process will be Refunded. <br>
+            <span class="badge  badge-success "><i class="fa fa-check"></i>Completed</span> - Your order process has
+            been completed. <br>
+            <span class="badge  badge-danger "><i class="fa fa-ban"></i>Cancelled</span> - This means that your
+            transaction has been canceled because either (1) We didn't receive your side payment within 1 hour. <br>
+            (2) You have done order wrongly /out of the rules .
+
+
+
+        </div>
+
+<%if(conframorder.length>0  || buyconframorder.length > 0){%>
+        <div class="order">
+
+            <h2>Your Order <span style="color: aqua;">Information</span> </h2>
+            <table class="  conframordertable tabilee ">
+                <thead class="conframorder">
+                    <tr>
+                        <th scope="col">Order ID</th>
+                        <th scope="col">Method</th>
+                        <th scope="col">Sent</th>
+                        <th scope="col">Recive</th>
+                        <th scope="col">Se.Am</th>
+                        <th scope="col">Re.Am</th>
+                        <th scope="col">Sent From</th>
+                        <th scope="col">Recive From</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody class="conframorder">
+                    <%  for(let order of conframorder){ %>
+                    <tr>
+
+                        <td style="font-size: smaller;">
+                            <%=order._id  %>
+                        </td>
+                        <td>
+                            <% if(order.condition == 'selling'){%> <span class="badge  badge-primary ">SELL</span><%}
+                         else if(order.condition == 'buying'){%> <span class="badge  badge-primary ">BUY</span><%}%>
+                        </td>
+                        <td>
+                            <% if(order.usdcardname == 'bk'){%> <span class="badge   ">Bkash</span><%}
+                          else if(order.usdcardname == 'sk'){%> <span class="badge   ">Skrill</span><%}
+                          else if(order.usdcardname == 'no'){%> <span class="badge   ">Nagad</span><%}
+                          else if(order.usdcardname == 'rd'){%> <span class="badge   ">Rocket-Dutch</span><%}
+                          else if(order.usdcardname == 'ne'){%> <span class="badge   ">Neteller</span><%}
+                          else if(order.usdcardname == 'pa'){%> <span class="badge   ">PayPal</span><%}%>  
+                          
+                          </td>
+                        <td>
+                            <% if(order.bdcardName == 'bk'){%> <span class="badge   ">Bkash</span><%}
+                          else if(order.bdcardName == 'sk'){%> <span class="badge   ">Skrill</span><%}
+                         else if(order.bdcardName == 'no'){%> <span class="badge   ">Nagad</span><%}
+                        else if(order.bdcardName == 'rd'){%> <span class="badge   ">Rocket-Dutch</span><%}
+                        else if(order.bdcardName == 'ne'){%> <span class="badge   ">Neteller</span><%}
+                       else if(order.bdcardName == 'pa'){%> <span class="badge   ">PayPal</span><%}%>  
+                            </td>
+                       
+                        <td><%=order.usdsend  %></td>
+                        <td><%=order.tkrecive  %></td>
+
+
+                        <td><%=order.senderphone  %></td>
+                        <td><%=order.reciveemail  %></td>
+                        <td style="font-size: 12px;">
+                            <%=order.createdAt.toLocaleDateString()%>
+                            <%=order.createdAt.toLocaleTimeString()%>
+                        </td>
+                        <td>
+                            <% if(order.status == 'pandding'){%> <span class="badge  badge-primary "><i
+                                    class="fa fa-refresh"></i>Pending</span><%}else if(order.status == 'awaiting'){%>
+                            <span class="badge  badge-danger "><i
+                                    class="fa fa-clock-o"></i>Awaiting</span><%}else if(order.status == 'refunded'){%>
+                            <span class="badge  badge-info "><i
+                                    class="fa fa-exclamation-triangle"></i>Refunded</span><%}else if(order.status == 'completed'){%>
+                            <span class="badge  badge-success "><i
+                                    class="fa fa-check"></i>Completed</span><%}else if(order.status == 'cancelled'){%>
+                            <span class="badge  badge-danger "><i class="fa fa-ban"></i>Cancelled</span><%}%></td>
+                    </tr>
+                    <% } %>
+
+                            <%  for(let order of buyconframorder){ %>
+                    <tr>
+
+                        <td style="font-size: smaller;">
+                            <%=order._id  %>
+                        </td>
+                        <td>
+                            <% if(order.condition == 'selling'){%> <span class="badge  badge-primary ">SELL</span><%}
+                                             else if(order.condition == 'buying'){%> <span
+                                class="badge  badge-primary ">BUY</span><%}%>
+                                            </td>
+                                            <td>
+                                                <% if(order.sentaccountname == 'bk'){%> <span
+                                class="badge   ">Bkash</span><%}
+                                              else if(order.sentaccountname == 'sk'){%> <span
+                                class="badge   ">Skrill</span><%}
+                                              else if(order.sentaccountname == 'no'){%> <span
+                                class="badge   ">Nagad</span><%}
+                                              else if(order.sentaccountname == 'rd'){%> <span
+                                class="badge   ">Rocket-Dutch</span><%}
+                                              else if(order.sentaccountname == 'ne'){%> <span
+                                class="badge   ">Neteller</span><%}
+                                              else if(order.sentaccountname == 'pa'){%> <span
+                                class="badge   ">PayPal</span><%}%>  
+                                              
+                                              </td>
+                                            <td>
+                                                <% if(order.reciveusdName == 'bk'){%> <span
+                                class="badge   ">Bkash</span><%}
+                                              else if(order.reciveusdName == 'sk'){%> <span
+                                class="badge   ">Skrill</span><%}
+                                             else if(order.reciveusdName == 'no'){%> <span
+                                class="badge   ">Nagad</span><%}
+                                            else if(order.reciveusdName == 'rd'){%> <span
+                                class="badge   ">Rocket-Dutch</span><%}
+                                            else if(order.reciveusdName == 'ne'){%> <span
+                                class="badge   ">Neteller</span><%}
+                                           else if(order.reciveusdName == 'pa'){%> <span class="badge   ">PayPal</span><%}%>  
+                                                </td>
+                                           
+                                            <td><%=order.senttk  %></td>
+                        <td><%=order.reciveusd  %></td>
+
+
+                        <td><%=order.senderphone  %></td>
+                        <td><%=order.reciveemail  %></td>
+                        <td style="font-size: 12px;">
+                            <%=order.createdAt.toLocaleDateString()%>
+                            <%=order.createdAt.toLocaleTimeString()%>
+                        </td>
+                        <td>
+                            <% if(order.status == 'pandding'){%> <span class="badge  badge-primary "><i
+                                    class="fa fa-refresh"></i>Pending</span><%}else if(order.status == 'awaiting'){%>
+                            <span class="badge  badge-danger "><i
+                                    class="fa fa-clock-o"></i>Awaiting</span><%}else if(order.status == 'refunded'){%>
+                            <span class="badge  badge-info "><i
+                                    class="fa fa-exclamation-triangle"></i>Refunded</span><%}else if(order.status == 'completed'){%>
+                            <span class="badge  badge-success "><i
+                                    class="fa fa-check"></i>Completed</span><%}else if(order.status == 'cancelled'){%>
+                            <span class="badge  badge-danger "><i class="fa fa-ban"></i>Cancelled</span><%}%></td>
+                                        </tr>
+                        <% } %>
+
+                </tbody>
+            </table>
+        </div>
+
+        <%}else{%>
+        <hr>
+
+        <h2 style="text-align: center; color: tomato; padding-top: 30px;">Order Not Found, Please Exchange your Money
+        </h2>
+        <% } %>
+    </div>
+
+    <%- include('../includes/end.ejs') %></br>

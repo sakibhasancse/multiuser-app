@@ -1,0 +1,186 @@
+<%- include('../adminInclude/header.ejs')%>
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <%- include('../adminInclude/sidenav.ejs') %>
+        <%- include('../adminInclude/topnav.ejs') %>
+
+
+        <!-- Container Fluid-->
+        <div class="container-fluid" id="container-wrapper">
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">User Profile</h1>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="./">Home</a></li>
+                    <li class="breadcrumb-item">view</li>
+                    <li class="breadcrumb-item active" aria-current="page">user</li>
+                </ol>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12 mb-4">
+
+                    <div class="card">
+                       <h2 style="text-align: center; padding: 2rem; padding-bottom: .2rem; font-size: 20px;"><%=result.name%></h2>
+                       <h2 style="text-align: center;  font-size: 15px;"><%=result.email%> , <%=result.phone%></h2>
+                       
+                        
+                        <div class="card-footer"></div>
+                    </div>
+                    
+                </div>
+            </div>
+        
+           
+                <%if(conframorder.length>0  || buyconframorder.length > 0){%>
+                <div class="order">
+                
+                    <h2>User Order <span style="color: aqua;">Information</span> </h2>
+                    <table class="table   ">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Order ID</th>
+                                <th scope="col">Method</th>
+                                <th scope="col">Sent</th>
+                                <th scope="col">Recive</th>
+                                <th scope="col">Se.Am</th>
+                                <th scope="col">Re.Am</th>
+                                <th scope="col">Sent From</th>
+                                <th scope="col">Recive From</th>
+                                <th scope="col">Time</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbody">
+                            <%  for(let order of conframorder){ %>
+                            <tr>
+                
+                                <td style="font-size: smaller;">
+                                    <%=order._id  %>
+                                </td>
+                                <td>
+                                    <% if(order.condition == 'selling'){%> <span class="badge  badge-primary ">SELL</span><%}
+                                         else if(order.condition == 'buying'){%> <span class="badge  badge-primary ">BUY</span><%}%>
+                                        </td>
+                                        <td>
+                                            <% if(order.usdcardname == 'bk'){%> <span class="badge   ">Bkash</span><%}
+                                          else if(order.usdcardname == 'sk'){%> <span class="badge   ">Skrill</span><%}
+                                          else if(order.usdcardname == 'no'){%> <span class="badge   ">Nagad</span><%}
+                                          else if(order.usdcardname == 'rd'){%> <span class="badge   ">Rocket-Dutch</span><%}
+                                          else if(order.usdcardname == 'ne'){%> <span class="badge   ">Neteller</span><%}
+                                          else if(order.usdcardname == 'pa'){%> <span class="badge   ">PayPal</span><%}%>  
+                                          
+                                          </td>
+                                        <td>
+                                            <% if(order.bdcardName == 'bk'){%> <span class="badge   ">Bkash</span><%}
+                                          else if(order.bdcardName == 'sk'){%> <span class="badge   ">Skrill</span><%}
+                                         else if(order.bdcardName == 'no'){%> <span class="badge   ">Nagad</span><%}
+                                        else if(order.bdcardName == 'rd'){%> <span class="badge   ">Rocket-Dutch</span><%}
+                                        else if(order.bdcardName == 'ne'){%> <span class="badge   ">Neteller</span><%}
+                                       else if(order.bdcardName == 'pa'){%> <span class="badge   ">PayPal</span><%}%>  
+                                            </td>
+                                       
+                                        <td><%=order.usdsend  %></td>
+                                <td><%=order.tkrecive  %></td>
+                
+                
+                                <td><%=order.senderphone  %></td>
+                                <td><%=order.reciveemail  %></td>
+                                <td style="font-size: 12px;">
+                                    <%=order.createdAt.toLocaleDateString()%>
+                                    <%=order.createdAt.toLocaleTimeString()%>
+                                </td>
+                                <td>
+                                    <% if(order.status == 'pandding'){%> <span class="badge  badge-primary "><i
+                                            class="fa fa-refresh"></i>Pending</span><%}else if(order.status == 'awaiting'){%>
+                                    <span class="badge  badge-danger "><i
+                                            class="fa fa-clock-o"></i>Awaiting</span><%}else if(order.status == 'refunded'){%>
+                                    <span class="badge  badge-info "><i
+                                            class="fa fa-exclamation-triangle"></i>Refunded</span><%}else if(order.status == 'completed'){%>
+                                    <span class="badge  badge-success "><i
+                                            class="fa fa-check"></i>Completed</span><%}else if(order.status == 'cancelled'){%>
+                                    <span class="badge  badge-danger "><i class="fa fa-ban"></i>Cancelled</span><%}%></td>
+                                    </tr>
+                                    <% } %>
+                
+                                    <%  for(let order of buyconframorder){ %>
+                            <tr>
+                
+                                <td style="font-size: smaller;">
+                                    <%=order._id  %>
+                                </td>
+                                <td>
+                                    <% if(order.condition == 'selling'){%> <span class="badge  badge-primary ">SELL</span><%}
+                                                             else if(order.condition == 'buying'){%> <span
+                                        class="badge  badge-primary ">BUY</span><%}%>
+                                                            </td>
+                                                            <td>
+                                                                <% if(order.sentaccountname == 'bk'){%> <span
+                                        class="badge   ">Bkash</span><%}
+                                                              else if(order.sentaccountname == 'sk'){%> <span
+                                        class="badge   ">Skrill</span><%}
+                                                              else if(order.sentaccountname == 'no'){%> <span
+                                        class="badge   ">Nagad</span><%}
+                                                              else if(order.sentaccountname == 'rd'){%> <span
+                                        class="badge   ">Rocket-Dutch</span><%}
+                                                              else if(order.sentaccountname == 'ne'){%> <span
+                                        class="badge   ">Neteller</span><%}
+                                                              else if(order.sentaccountname == 'pa'){%> <span
+                                        class="badge   ">PayPal</span><%}%>  
+                                                              
+                                                              </td>
+                                                            <td>
+                                                                <% if(order.reciveusdName == 'bk'){%> <span
+                                        class="badge   ">Bkash</span><%}
+                                                              else if(order.reciveusdName == 'sk'){%> <span
+                                        class="badge   ">Skrill</span><%}
+                                                             else if(order.reciveusdName == 'no'){%> <span
+                                        class="badge   ">Nagad</span><%}
+                                                            else if(order.reciveusdName == 'rd'){%> <span
+                                        class="badge   ">Rocket-Dutch</span><%}
+                                                            else if(order.reciveusdName == 'ne'){%> <span
+                                        class="badge   ">Neteller</span><%}
+                                                           else if(order.reciveusdName == 'pa'){%> <span class="badge   ">PayPal</span><%}%>  
+                                                                </td>
+                                                           
+                                                            <td><%=order.senttk  %></td>
+                                <td><%=order.reciveusd  %></td>
+                
+                
+                                <td><%=order.senderphone  %></td>
+                                <td><%=order.reciveemail  %></td>
+                                <td style="font-size: 12px;">
+                                    <%=order.createdAt.toLocaleDateString()%>
+                                    <%=order.createdAt.toLocaleTimeString()%>
+                                </td>
+                                <td>
+                                    <% if(order.status == 'pandding'){%> <span class="badge  badge-primary "><i
+                                            class="fa fa-refresh"></i>Pending</span><%}else if(order.status == 'awaiting'){%>
+                                    <span class="badge  badge-danger "><i
+                                            class="fa fa-clock-o"></i>Awaiting</span><%}else if(order.status == 'refunded'){%>
+                                    <span class="badge  badge-info "><i
+                                            class="fa fa-exclamation-triangle"></i>Refunded</span><%}else if(order.status == 'completed'){%>
+                                    <span class="badge  badge-success "><i
+                                            class="fa fa-check"></i>Completed</span><%}else if(order.status == 'cancelled'){%>
+                                    <span class="badge  badge-danger "><i class="fa fa-ban"></i>Cancelled</span><%}%></td>
+                                                        </tr>
+                                        <% } %>
+                
+                        </tbody>
+                    </table>
+                </div>
+                
+                <%}else{%>
+                <hr>
+                
+                <h2 style="text-align: center; color: tomato; padding-top: 30px;">Order Not Found, Please Exchange your Money
+                </h2>
+                <% } %>
+                </div>
+                </div>
+        
+      
+    </div>
+
+    <%- include('../adminInclude/footer.ejs') %>

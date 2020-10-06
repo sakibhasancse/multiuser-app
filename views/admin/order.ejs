@@ -1,0 +1,181 @@
+<%- include('../adminInclude/header.ejs')%>
+</head>
+
+<body id="page-top">
+  <div id="wrapper">
+<div id="content-wrapper" class="d-flex flex-column">
+  <div id="content">
+    <!-- TopBar -->
+    <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+      <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
+        <a href="/currency/admin/index"><i class="fa fa-home" style="color: rgb(45, 78, 54);"></i></a>
+        
+      </button>
+      <ul class="navbar-nav ml-auto">
+
+
+
+        <div class="topbar-divider d-none d-sm-block"></div>
+        <li class="nav-item dropdown no-arrow">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <img class="img-profile rounded-circle" src="/vandor/img/boy.png" style="max-width: 60px">
+            <span class="ml-2 d-none d-lg-inline text-white small">Dashboard</span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+
+
+
+
+
+            <a class="dropdown-item">
+              <form action="/453644/admin/logout" method="post">
+                <input type="hidden" name="_csrf" value="<%= csrfTokenss %>">
+                <button style="border: none;
+                    background: none;" type="submit"><i
+                    class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Logout</button>
+              </form>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="container-fluid" id="container-wrapper">
+
+
+      <!-- Invoice Example -->
+      <div class="col-xl-12 col-lg-7 mb-6">
+        <div class="card">
+<h2 style="text-align: center; padding: 3rem;">Sell  Order </h2>
+          <div class="table-responsive">
+            <table class="table align-items-center table-flush">
+              <% if(order.length >0 ){ %>
+              <thead class="thead-light">
+                <tr>
+                  <th>ID & Date</th>
+                  <th>Cur</th>
+                  <th>Order</th>
+                  <th>Number</th>
+                  <th>Account</th>
+                  <th>Status</th>
+                  <th>Customer</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let orders of order) { %>
+
+                <tr>
+                  <td style="font-size: 13px;">
+                    <%=orders._id%> <br>
+                    <%=orders.createdAt.toLocaleTimeString()%> ,
+                    <%=orders.createdAt.toLocaleDateString()%>
+                    Message: <%=orders.description%>
+                  </td>
+                  <td>
+                    <% if(orders.condition == 'selling'){%> 
+                    <span class="badge  badge-primary ">SELL</span><%}
+                    else if(orders.condition == 'buying'){%> 
+                      <span class="badge  badge-info ">BUY</span><%}%> 
+                      
+                      </td>
+                
+
+                  <td style="font-size: 13px;">
+                    <span style="color: rgb(0, 0, 0); font-weight: 600;">Send:</span>
+                    <%=orders.usdsend%>
+                    <span style="color: rgb(0, 0, 0); font-weight: 600;">Recive:</span>
+                    <%=orders.tkrecive%>
+
+                  </td>
+                  <td style="font-size: 13px;">
+                    <span style="color: rgb(0, 0, 0); font-weight: 600;">Send:</span>
+                    <%=orders.senderphone%> <br>
+                    <span style="color: rgb(0, 0, 0); font-weight: 600;">Recive:</span> <%=orders.reciveemail%>
+
+                  </td>
+                  <td style="font-size: 17px;">
+                    <span style="color: rgb(0, 0, 0); font-size: 12px; font-weight: 600;">Send:</span>
+                 
+
+                        <% if(orders.usdcardname == 'bk'){%> <span class="badge   ">Bkash</span><%}
+                          else if(orders.usdcardname == 'sk'){%> <span class="badge   ">Skrill</span><%}
+                         else if(orders.usdcardname == 'no'){%> <span class="badge   ">Nagad</span><%}
+                        else if(orders.usdcardname == 'rd'){%> <span class="badge   ">Rocket-Dutch</span><%}
+                        else if(orders.usdcardname == 'ne'){%> <span class="badge   ">Neteller</span><%}
+                       else if(orders.usdcardname == 'pa'){%> <span class="badge   ">PayPal</span><%}%>  
+
+                       <div class="d-flex" >
+                        <span  style="color: rgb(0, 0, 0); font-size: 12px; font-weight: 600;">Recive:</span> 
+                        
+                        <% if(orders.bdcardName == 'bk'){%> <span class="badge   ">Bkash</span><%}
+                                              else if(orders.bdcardName == 'sk'){%> <span class="badge   ">Skrill</span><%}
+                                              else if(orders.bdcardName == 'no'){%> <span class="badge   ">Nagad</span><%}
+                                              else if(orders.bdcardName == 'rd'){%> <span class="badge   ">Rocket-Dutch</span><%}
+                                              else if(orders.bdcardName == 'ne'){%> <span class="badge   ">Neteller</span><%}
+                                              else if(orders.bdcardName == 'pa'){%> <span class="badge   ">PayPal</span><%}%>  
+                                              </div>
+                  
+                  </td>
+
+
+
+
+
+                  <td>
+                    <form action="/currency/admin/order" method="POST">
+                      <input type="hidden" name="_csrf" value="<%= csrfTokenss  %>">
+                      <input type="hidden" name="orderId" value="<%=orders._id%>">
+                      <select name="status" s class="selectpicker" data-width="120px" onchange="this.form.submit()">
+                        <option value="pending" class=" badge-primary" <%if(orders.status === 'pending' ){%> selected <%}%>>Pending</option>
+                        <option value="awaiting" class=" badge-danger" <%if(orders.status === 'awaiting'){%> selected <%}%>>Awaiting</option>
+                        <option value="completed"class=" badge-success" <%if(orders.status === 'completed'){%>selected <%}%> >Completed</option>
+                        <option value="refunded" class=" badge-info"<%if(orders.status === 'refunded'){ %> selected <%}%>>Refunded</option>
+                        <option value="cancelled"class=" badge-danger" <%if(orders.status === 'cancelled'){%> selected <%}%>>Cancelled</option>
+                      </select>
+                    </form>
+                    
+                    </td>
+                  <td style="font-size: 13px;">
+                  
+                    <%=orders.userId%> <%=orders.personalemail%> <%=orders.personalphone %> </td>
+                  <td>
+                    <form action="/currency/admin/order/delete" method="POST">
+                      <input type="hidden" value="<%= orders._id %>" name="orderId">
+                      <input type="hidden" name="_csrf" value="<%= csrfTokenss  %>">
+                      <button class="btn btn-sm btn-danger" style="font-size: 15px;" type="submit">Delete</button>
+                    </form>
+
+                  </td>
+                </tr>
+
+                <% } %>
+
+
+
+
+
+              </tbody>
+              <% }else{ %>
+              <h2 class="text-center">! Order Not Found </h2>
+              <% } %>
+            </table>
+          </div>
+          <div class="card-footer"></div>
+        </div>
+      </div>
+
+    </div>
+    <!--Row-->
+
+    <!-- Modal Logout -->
+
+
+  </div>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css"
+    rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"></script>
+
+  <%- include('../adminInclude/footer.ejs') %>

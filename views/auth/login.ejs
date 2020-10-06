@@ -1,0 +1,58 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/forms.css">
+<link rel="stylesheet" href="/css/auth.css">
+
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                    <% if (errorMessage) { %>
+                    <div class="user-message user-message--error"><%= errorMessage %></div>
+                    <% } %>
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Sign In</h5>
+
+                        <form class="login-form form-signin" action="/login" method="POST">
+                            
+
+
+
+                            <div class="form-label-group"> <input type="email" id="inputEmail"
+                                    class="form-control <%=validationError.find(e=> e.param === 'email')?'invalid' : '' %> "
+                                    type="email" name="email" id="email" value="<%=oldInput.email%>"
+                                    placeholder="Email address" required autofocus>  </div>
+
+
+
+                            <div class="form-label-group"> <input type="password" id="inputPassword"
+                                    class="form-control <%=validationError.find(e=> e.param === 'password')?'invalid' : '' %> " name="password" value="<%=oldInput.password%>" placeholder="Password" required></div>
+
+
+
+
+
+                            <div class="custom-control custom-checkbox mb-3"> <input type="checkbox"
+                                    class="custom-control-input" id="customCheck1"> <label class="custom-control-label"
+                                    for="customCheck1">Remember password?</label>
+                            </div>
+
+                            <input type="hidden" name="_csrf" value="<%= csrfTokenss %>">
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign
+                                in</button>
+                          
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <%- include('../includes/end.ejs') %>

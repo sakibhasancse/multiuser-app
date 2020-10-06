@@ -1,0 +1,129 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/product.css">
+<link rel="stylesheet" href="/css/contact.css">
+<link rel="stylesheet" href="/css/auth.css">
+
+
+</head>
+<script>
+
+
+    function convertCurrency() {
+
+
+        var from = document.getElementById('form').value;
+        var to = document.getElementById('to').value;
+        var xmlhttp = new XMLHttpRequest();
+        var url = "/getprice/selldoller?currency=" + from + "," + to;
+
+        var xmlhttp;
+
+        // code for IE7+, Firefox, Chrome, Opera, Safari
+        if (window.XMLHttpRequest) {
+            xmlhttp = new XMLHttpRequest();
+        }
+        // code for IE6, IE5
+        else {
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                var result = xmlhttp.responseText;
+
+                var a = JSON.parse(result);
+                var onUnit = a.bdrate
+
+                var amt = document.getElementById("formAmount").value
+                document.getElementById("toAmount").value = (onUnit * amt).toFixed(2)
+                // alert(amt)
+            }
+
+        }
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+
+
+    }
+
+</script>
+
+<style>
+    .fa {
+  color: rgb(0, 0, 0) ;
+}
+</style>
+<body onload="convertCurrency()">
+    <%- include('../includes/navigation.ejs') %>
+    <div class="container">
+
+        <h2 class="limitebuy">Sell Your Doller <span style="font-size: 24px;">
+                ( বিক্রি করুন )
+            </span> </h2>
+        <p style="text-align: center;">Please Select Your Account (আপনার একাউন্ট টি এখন থেকে নিদারুণ করুন)</p>
+
+
+        
+        <div class="box">
+            <% if (errorMessage) { %>
+            <div class="user-message user-message--error"><%= errorMessage %></div>
+            <% } %>
+            <form action="/selldoller" method="POST">
+                <table class="table">
+
+
+                    <tr>
+                        <td>
+                            <input  type="text" name="usdsend" id="formAmount" value="2" onkeyup="convertCurrency()" class="form-control 
+                            <%=validationError.find(e=> e.param === 'usdsend')?'invalid' : '' %>">
+                        </td>
+                        <br>
+
+                        <td>
+                            <select id="to" name="cardname" onchange="convertCurrency()" class="form-control">
+                                <option value="sk" selected>Skrill</option>
+                                <option value="ne">Neteller</option>
+                                <option value="pa">PayPal</option>
+                            </select>
+
+                        </td>
+                        <td>
+                            <h4 class="bdletteer">You Will Send (আপনি পাঠাবেন)</h4>
+                        </td>
+
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" name="excengprice" id="toAmount" class="form-control " readonly>
+                        </td>
+                        <br>
+                        <td>
+                            <select id="form" name="bdcard" class="form-control" onchange="convertCurrency()" name="">
+                                <option value="bk" selected>Bkash</option>
+                                <option value="no">Nagad</option>
+                                <option value="rd">Rocket-Dutch-Bangla</option>
+                            </select>
+                        </td>
+                        <td>
+                            <h4 class="bdletteer">You will get (আপনি পাবেন)</h4>
+                        </td>
+                    </tr>
+
+                </table>
+                <p style="color: red;">Note: সর্বোচ্চ (50) ডলার এবং সর্বনিম্ন (10) ডলার</p>
+                
+                <div style=" text-align: center;" class="div">
+                    <input type="hidden" name="_csrf" value="<%= csrfTokenss %>">
+                    <input type="hidden" name="condition" value="selling">
+                    <button class=" btn  btn-warning btn-sm" type="submit">Excenge</button>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+
+    <%- include('../includes/end.ejs') %>

@@ -1,0 +1,133 @@
+.fb-profile img.fb-image-lg {
+  z-index: 0;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.fb-profile img.fb-image-lg {
+  height: 200px;
+}
+.fb-image-profile {
+  margin: -90px 10px 0px 50px;
+  z-index: 9;
+  width: 20%;
+}
+
+@media (max-width: 768px) {
+  .fb-profile-text > h1 {
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .fb-image-profile {
+    margin: -45px 10px 0px 25px;
+    z-index: 9;
+    width: 20%;
+  }
+  .thamline {
+    border-color: 10px solid rgb(184, 23, 23);
+  }
+}
+
+.card .post .authorpost.thumbimage {
+  background-position: 50% 50%;
+  background-size: cover;
+  height: 180px;
+}
+@media only screen and (min-width: 999px) {
+  .profilecart.card {
+    flex-direction: row !important;
+    border: none !important;
+  }
+  /* .card-block.cartblock {
+        padding: 1.25rem;
+       */
+}
+
+.card-block {
+    padding: 1.25rem;
+    padding-left: 0; 
+}
+
+.card-title a {
+  font-size: 1.25rem;
+  line-height: 1.25;
+}
+.card-block .card-title {
+  font-size: 1.45rem;
+  color: rgba(0, 0, 0, 0.8);
+  line-height: 1.25;
+  font-weight: 700;
+}
+.card-block .card-title a {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.8);
+}
+.card-block .card-title a:hover {
+  /* text-decoration: underline; */
+  color: rgba(240, 72, 72, 0.8);
+}
+.card-block .card-text {
+  font-size: 20px;
+  color: #888;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+.card .authorpost {
+  box-shadow: 0 1px 16px 20px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  margin-bottom: 20px;
+}
+.listrecent .wrapfooter {
+  font-size: 13px;
+  margin-top: 30px;
+}
+.metafooter .author-meta {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+/* // */
+    .imagesss .wrapphoto {
+        height: 258px;
+        flex: 0 0 auto;
+    }
+.wrapphoto .postthumline {
+  background-size: cover;
+    height: 100%;
+    display: block;
+    background-position: 38% 22% !important;
+    background-origin: border-box!important;
+    border-top-left-radius: 2px;
+}
+.metafooter .wrapfooter{
+    position: absolute;
+    bottom: 20px;
+    font-size: 12px;
+    display: block;
+    width: 85%;
+
+}
+.meta-footer-thumb{
+    font-size: 12px;
+}
+.meta-footer-thumb a{
+    text-decoration: none;
+    
+}
+.meta-footer-thumb a img{
+       width: 40px;
+    height: 40px;
+    float: left;
+    margin-right: 13px;
+    border-radius: 100%;
+}
+.author-meta{
+    display: inline-block;
+    flex: 1 1 auto;
+    white-space: nowrap!important;
+    text-overflow: ellipsis!important;
+    overflow: hidden!important;
+}
+.author-meta .post-name a{
+    color: rgba(0,0,0,.8);
+}

@@ -1,0 +1,147 @@
+<%- include('../includes/head.ejs') %>
+<!-- <link rel="stylesheet" href="/css/product.css"> -->
+<link rel="stylesheet" href="/css/profile.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+</head>
+<style>
+    .form-label-group {
+        padding-bottom: 1rem;
+    }
+
+    .container .star-widget input {
+        display: none;
+    }
+
+    
+    .container .star-widget label {
+        font-size: 40px;
+        color: #444;
+        padding: 10px;
+        cursor: pointer;
+        float: right;
+        transition: all 0.2s ease;
+    }
+    
+    @media (max-width: 410px) {
+        .container .star-widget label {
+
+            font-size: 27px;
+
+        }
+    }
+    .container .star-widget input:not(:checked)~label:hover,
+    .container .star-widget input:not(:checked)~label:hover~label {
+        color: #fd4;
+    }
+
+    .container .star-widget input:checked~label {
+        color: #fd4;
+    }
+
+    .container .star-widget input#rating-5:checked~label {
+        color: #fd4;
+        text-shadow: 0 0 20px #952;
+    }
+</style>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+
+    <div class="container">
+
+
+        <div class="container">
+            <div class="row">
+                <%if(data.length>0 || buydata.length>0){%>
+                <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+
+
+                    <% for(let result of data){ %>
+                    <div class="card card-signin my-5">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Give Me Rating</h5>
+
+                            <form class=" form-signin" action="/rating" method="POST">
+
+                                <div class="star-widget form-label-group d-flex flex-row-reverse pl-3"
+                                    style="    justify-content: space-evenly;">
+                                    <input type="radio" name="rating" value="rating-5" id="rating-5">
+                                    <label for="rating-5" class="fas fa-star"></label>
+                                    <input type="radio" name="rating" value="rating-4" id="rating-4">
+                                    <label for="rating-4" class="fas fa-star"></label>
+                                    <input type="radio" name="rating" value="rating-3" id="rating-3">
+                                    <label for="rating-3" class="fas fa-star"></label>
+                                    <input type="radio" name="rating" value="rating-2" id="rating-2">
+                                    <label for="rating-2" class="fas fa-star"></label>
+                                    <input type="radio" name="rating" value="rating-1" id="rating-1">
+                                    <label for="rating-1" class="fas fa-star"></label>
+
+                                </div>
+
+
+                                <div class="form-label-group">
+
+                                    <textarea class="form-control " type="text" placeholder="Description"
+                                        name="description" id="name" required></textarea>
+                                </div>
+
+
+                                <input type="hidden" name="_csrf" value="<%=csrfTokenss %>">
+                                <input type="hidden" name="orderId" value="<%=result._id %>">
+
+                                <button class="btn btn-lg btn-primary btn-block " type="submit">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                    <% } %>
+                    <% for(let result of buydata){ %>
+                    <div class="card card-signin my-5">
+                        <div class="card-body" style="margin-top: 3rem;">
+                            <h5 class="card-title text-center">Give Me Rating</h5>
+
+                            <form class=" form-signin" action="/rating" method="POST">
+
+                                <div class="star-widget form-label-group d-flex flex-row-reverse pl-3">
+                                    <input type="radio" name="rating" value="rating-5" id="rating-5">
+                                    <label for="rating-5" class="fas fa-star"></label>
+                                    <input type="radio" name="rating" value="rating-4" id="rating-4">
+                                    <label for="rating-4" class="fas fa-star"></label>
+                                    <input type="radio" name="rating" value="rating-3" id="rating-3">
+                                    <label for="rating-3" class="fas fa-star"></label>
+                                    <input type="radio" name="rating" value="rating-2" id="rating-2">
+                                    <label for="rating-2" class="fas fa-star"></label>
+                                    <input type="radio" name="rating" value="rating-1" id="rating-1">
+                                    <label for="rating-1" class="fas fa-star"></label>
+
+                                </div>
+
+
+                                <div class="form-label-group">
+
+                                    <textarea class="form-control " type="text" placeholder="Description"
+                                        name="description" id="name" required></textarea>
+                                </div>
+
+
+                                <input type="hidden" name="_csrf" value="<%=csrfTokenss %>">
+                                <input type="hidden" name="orderId" value="<%=result._id %>">
+                                <button class="btn btn-lg btn-primary btn-block " type="submit">Submit</button>
+                            </form>
+                        </div>
+
+                    </div>
+                    <% } %>
+                </div>
+                <% }else{ %>
+                <h2 style="text-align: center; color: red; padding: 5rem;">You Are not complete an order, if you are
+                    complete any order you can available the rating</h2>
+                <% } %>
+            </div>
+        </div>
+
+
+    </div>
+
+    <%- include('../includes/end.ejs') %>

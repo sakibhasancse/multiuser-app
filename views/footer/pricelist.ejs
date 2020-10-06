@@ -1,0 +1,94 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/product.css">
+<link rel="stylesheet" href="/css/contact.css">
+
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <div class="container">
+
+        <h2 class="limitebuy">Buy Sell Rate And Limit</h2>
+        <hr>
+        <section id="about" class="about">
+            <div class="container flex mobile-aboute items-center">
+                <div class="flex-1 pr">
+                    <h1>Buy Rate <span>Limit & Fees</span></h1>
+                    <table class="table">
+
+                        <table class="table">
+                        
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Cardname</th>
+                                    <th scope="col">Rate</th>
+                                    <th scope="col">LImit</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Skill</td>
+                                    <td><%=bkashandskill.bdrate%> Tk</td>
+                                    <td>50$</td>
+                                    
+                                </tr>
+                                <tr>
+                                    
+                                    
+                                    <td>Pyonner</td>
+                                    <td><%=nogodpayonner.bdrate%>TK</td>
+                                    <td>60$</td>
+                                </tr>
+                                <tr>
+                                    
+                                    
+                                    <td>Netteler</td>
+                                    <td><%=rocketnetteler.bdrate%>Tk</td>
+                                    <td>$100</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+                <div class="flex-1 mobile-aboute-center">
+                    <h1>Sell Rate <span>Limit & Fees</span></h1>
+                    <table class="table">
+
+
+                        <table class="table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Cardname</th>
+                                    <th scope="col">Rate</th>
+                                    <th scope="col">LImit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Skill</td>
+                                    <td><%=buybkashandskill.bdrate%> Tk</td>
+                                    <td>50$</td>
+                                
+                                </tr>
+                                <tr>
+                                
+                                
+                                    <td>Pyonner</td>
+                                    <td><%=buynogodpayonner.bdrate%>TK</td>
+                                    <td>60$</td>
+                                </tr>
+                                <tr>
+                                
+                                
+                                    <td>Netteler</td>
+                                    <td><%=buyrocketnetteler.bdrate%>Tk</td>
+                                    <td>$100</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <%- include('../includes/end.ejs') %>

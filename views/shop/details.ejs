@@ -1,0 +1,187 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/product.css">
+<link rel="stylesheet" href="/css/contact.css">
+
+</head>
+
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <div class="container">
+
+        <h2 class="limitebuy">Confirm Your Order <span style="font-size: 18px;">( অর্ডার নিশ্চিত করুন )</span></h2>
+        <br>
+
+        <div class="box">
+            <form action="/neworder/<%=Id%> " method="POST">
+
+                <div class="col-md-12 pt-3">
+                    <div class="row uspricing">
+
+                        <div class="col-md-6 ">
+                            <input type="text" class="form-control" name="doller" value="<%=doller%> " readonly
+                                required>
+                            <h3 style="text-align: center; padding-top: 1rem;">You have bought (কিনেছেন)</h3>
+                        </div>
+
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="excengprice" value="<%=excengprice%>   "
+                                readonly required>
+                            <h3 style="text-align: center; padding-top: 1rem;">You have to sent (পাঠাবেন)</h3>
+                        </div>
+                    </div>
+                </div>
+                <br>
+          
+                <p class="sentnumber" style="color: red;">
+                    <%if(cardname === 'no'){ %> <%=Nagad.number%> (Nagat Personal)
+
+                    - এই নাম্বারে <%=doller%>
+
+
+                    Sent Mony <% }else if (cardname === 'bk'){ %> <%=bkash.number%> (Bkash Personal)
+
+                    - এই নাম্বারে <%=doller%>
+
+
+                    Sent Mony <% }else if (cardname === 'rd'){ %> <%=rocket.number%> (Rocket Personal)
+
+                    - এই নাম্বারে <%=doller%>
+
+
+                    Sent Mony <% }else if (cardname === 'sk'){ %> <%=Skrill.number%>
+
+                    - এই Account/নাম্বারে <%=doller%>
+
+
+                    Sent Mony <% }else if (cardname === 'ne'){ %> <%=Neteller.number%>
+
+                    - এই Account/নাম্বারে <%=doller%>
+
+
+                    Transfer <% }else if (cardname === 'pa'){ %> <%=PayPal.number%>
+
+                    - এই Account/নাম্বারে <%=doller%>
+
+
+                    Transfer <% }%> করে নিচের Form টি পূরণ
+                    করুন ।</p>
+                <hr>
+                <br>
+                <div class="card conframfrom">
+                    <div class="col-md-12   pt-3">
+                        <div class="row ">
+
+                            <div class="col-md-6">
+                                <input type="text" name="senderphone" class="form-control" placeholder="Type Your <%if(cardname === 'no'){ %> Nagat Number <% }else if (cardname === 'bk'){ %>  Bkash Number<% }else if (cardname === 'rd'){ %> Rocket Number <% }else if (cardname === 'sk'){ %> Skrill Email / ID <% }else if (cardname === 'ne'){ %> Neteller Email / ID 
+   
+                                <% }else if (cardname === 'pa'){ %> PayPal Email / ID
+                                
+                                <% }%>" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <h3>Sent
+
+                                    <%if(cardname === 'no'){ %> Nagat Number
+
+                                    <% }else if (cardname === 'bk'){ %> Bkash Number
+
+                                    <% }else if (cardname === 'rd'){ %> Rocket Number
+
+                                    <% }else if (cardname === 'sk'){ %> Skrill Email / ID
+
+                                    <% }else if (cardname === 'ne'){ %> Neteller Email / ID
+
+                                    <% }else if (cardname === 'pa'){ %> PayPal Email / ID
+
+                                    <% }%>
+
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="col-md-12 pt-3">
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <input type="text" name="reciveemail" class="form-control" placeholder="Type Your <%if(bdcard === 'no'){ %> Nagat
+                                
+                                <% }else if (bdcard === 'bk'){ %> Bkash Number
+                                
+                                <% }else if (bdcard === 'rd'){ %> Rocket Number
+                                
+                                <% }else if (bdcard === 'sk'){ %> Skrill Number
+                                
+                                <% }else if (bdcard === 'ne'){ %> Neteller Email / ID
+                                
+                                <% }else if (bdcard === 'pa'){ %> PayPal Email / ID
+                                
+                                <% }%>" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <h3>Receive
+                                    <%if(bdcard === 'no'){ %> Nagat
+
+                                    <% }else if (bdcard === 'bk'){ %> Bkash Number
+
+                                    <% }else if (bdcard === 'rd'){ %> Rocket Number
+
+                                    <% }else if (bdcard === 'sk'){ %> Skrill Number
+
+                                    <% }else if (bdcard === 'ne'){ %> Neteller Email / ID
+
+                                    <% }else if (bdcard === 'pa'){ %> PayPal Email / ID
+
+                                    <% }%> </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="col-md-12 pt-3">
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <input type="text" name="personalemail" class="form-control"
+                                    placeholder="Type Your  Email" required>
+                                <br>
+                                <input type="text" name="personalphone" class="form-control"
+                                    placeholder="Type Your  Phone Number" required>
+
+                            </div>
+
+                            <div class="col-md-6">
+                                <h3>Your Contact Information</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="col-md-12 pt-3">
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <textarea type="text" name="description" class="form-control">Type Something</textarea>
+                            </div>
+
+                            <div class="col-md-6">
+                                <h3>Description(Optional)</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="confrmabtn" style="float: right; ">
+
+                        <input type="hidden" name="_csrf" value="<%= csrfTokenss %>">
+
+                        <button class="btn btn-success" type="submit">Confram Order</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+
+
+    </div>
+
+    <%- include('../includes/end.ejs') %>

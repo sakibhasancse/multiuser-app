@@ -1,0 +1,99 @@
+<%- include('../adminInclude/header.ejs')%>
+<link rel="stylesheet" href="/css/forms.css">
+<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/css/product.css">
+</head>
+
+<style>
+    h2 {
+        color: red;
+        text-align: center;
+        font-size: 22px;
+    }
+
+    .row {
+        padding: 1rem
+    }
+
+    .form-inline {
+        /* margin-left: .5rem; */
+    }
+</style>
+
+<body id="page-top">
+    <div id="wrapper">
+        <%- include('../adminInclude/sidenav.ejs') %>
+        <%- include('../adminInclude/topnav.ejs') %>
+
+
+        <%if(results.length>0){ %>
+        <h2 class="p-3">Sell Price (ইউসার আপনার কাছে বিক্রি করবে) </h2>
+        <hr>
+        <div class="container ">
+            <% for (let sell of results){%>
+
+            <div class="card p-4">
+                <form action="/currency/admin/rate" method="post">
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="name">
+                                <% if(sell.bdcountryname == 'bk'){%> Bkash<%}
+                          else if(sell.bdcountryname == 'sk'){%> Skrill<%}
+                         else if(sell.bdcountryname == 'no'){%> Nagad<%}
+                        else if(sell.bdcountryname == 'rd'){%> Rocket-Dutch<%}
+                        else if(sell.bdcountryname == 'ne'){%> Neteller<%}
+                       else if(sell.bdcountryname == 'pa'){%> PayPal<%}%> - Tk
+
+
+                                </label>
+                            <input type="text" class="form-control" id="" name="bdrate" value="<%=sell.bdrate%>" placeholder="Price">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword4">
+                                <% if(sell.uscountryname == 'bk'){%> Bkash<%}
+                              else if(sell.uscountryname == 'sk'){%>
+                                Skrill<%}
+                                                                              else if(sell.uscountryname == 'no'){%>
+                                Nagad<%}
+                                                                              else if(sell.uscountryname == 'rd'){%>
+                                Rocket-Dutch<%}
+                                                                              else if(sell.uscountryname == 'ne'){%>
+                                Neteller<%}
+                                                                              else if(sell.uscountryname == 'pa'){%>
+                                PayPal<%}%>  
+                                                                          
+                                
+                                $USD
+                                </label>
+                            <input type="text" class="form-control" id="" name="usrate" value="<%=sell.usrate%>" placeholder="Price">
+                        </div>
+                    </div>
+                    <br>
+                    <input type="hidden" name="_csrf" value="<%= csrfTokenss  %>">
+                    <input type="hidden" name="rateId" value="<%=sell._id%>">
+                    <input type="hidden" class="form-control" name="bdcountryname" id="staticEmail2" value="<%=sell.bdcountryname%>">
+                    <input type="hidden" class="form-control" name="uscountryname" id="staticEmail2" value="<%=sell.uscountryname%>">
+
+                    <button type="submit" class="btn btn-primary mb-2">Update</button>
+                </form>
+            </div>
+            <br>
+            <br>
+            <%}%>
+            
+
+
+        </div>
+      
+     
+        <%}else{%>
+        <h2 class="p-3">Add Pricing </h2>
+
+        <%}%>
+
+        
+
+
+        <%- include('../adminInclude/footer.ejs') %>

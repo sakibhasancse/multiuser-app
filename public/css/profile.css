@@ -1,0 +1,13 @@
+.order {
+  padding-top: 4rem;
+}
+.order h2 {
+  font-weight: 600;
+  font-family: "Source Sans Pro", sans-serif;
+}
+td{
+  font-size: 14px;
+}
+.orderStatus{
+  padding-top: 4rem;
+}

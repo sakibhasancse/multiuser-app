@@ -1,0 +1,183 @@
+<div class="backdrop"></div>
+<header class="main-header ">
+    <button id="side-menu-toggle"><i class="fas fa-bars fa-1x"></i>
+    </button>
+    <nav class="main-header__nav">
+        <ul class="main-header__item-list">
+            <li class="main-header__item ">
+                <a class=" <%= path === '/' ? 'active' : '' %>" href="/"><img class="imagess"
+                        src="/img/demo-removebg-preview.png" width="150"></a>
+            </li>
+
+            <li class="main-header__item" style="    padding-top: 34px;">
+                <a class="<%= path === '/' ? 'active' : '' %>" href="/">Home</a>
+            </li>
+            <li class="main-header__item" style="    padding-top: 34px;">
+                <a class="<%= path === '/work' ? 'active' : '' %>" href="/how-its-work">How Its Work</a>
+            </li>
+
+        </ul>
+        <ul class="main-header__item-list">
+            <% if (!isAuthenticated) { %>
+            <li class="main-header__item">
+                <a class="<%= path === '/login' ? 'active' : '' %>" href="/login" style="border-radius: 18px;
+    padding: 8px 20px; text-decoration: none; 
+                        
+                     
+    color: #252525!important;
+    border: 1px solid #252525;">Login</a>
+            </li>
+            <li class="main-header__item">
+                <a class="<%= path === '/signup' ? 'active' : '' %>" href="/signup" style="border-radius: 18px;
+    padding: 8px 20px; text-decoration: none; background: #0080ff!important;
+                        color: #fff!important;
+                        border: 1px solid #0080ff; ">Signup</a>
+            </li>
+            <% } else { %>
+            <% if (isAuthenticated) { %>
+
+            <li class="nav-item dropdown no-arrow mx-1">
+                <a class="nav-link dropdown-toggle" style="margin-top: -5px; " href="#" id="messagesDropdown"
+                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                    <a class="<%= path === '/buydoller' ? 'active' : '' %>" style="border-radius: 18px;
+    padding: 8px 20px; text-decoration: none; background: #0080ff!important;
+                        color: #fff!important;
+                        border: 1px solid #0080ff; "
+                        href="/buydoller">Buy Currency</a>
+
+                </a>
+
+                </div>
+            </li>
+
+            <li class="nav-item dropdown no-arrow mx-1">
+                <a class="nav-link dropdown-toggle" style="margin-top: -5px;" href="#" id="messagesDropdown"
+                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                    <a class="<%= path === '/selldoller' ? 'active' : '' %>" style="border-radius: 18px;
+    padding: 8px 20px; text-decoration: none; background: #0080ff!important;
+                        color: #fff!important;
+                        border: 1px solid #0080ff; "
+                        href="/selldoller">Sell Currency</a>
+
+                </a>
+
+                </div>
+            </li>
+
+            <li class="nav-item dropdown no-arrow mx-1">
+                <a class="nav-link dropdown-toggle" style="margin-top: -5px;" href="#" id="messagesDropdown"
+                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a style="color: rgb(0, 0, 0);  text-decoration: none;" <a
+                        class="<%= path === 'order' ? 'active' : '' %>" href="/order">
+                        <i class="fas fa-shopping-cart fa-fw"></i>
+                        Order
+                    </a>
+                </a>
+
+                </div>
+            </li>
+            <%}%>
+              
+                <div class="topbar-divider d-none d-sm-block"></div>
+                <li class="nav-item dropdown  ">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                      <img class="img-profile rounded-circle" src="/vandor/img/boy.png" style="max-width: 30px">
+                      <span class="ml-2 d-none d-lg-inline text-white " style="color: black !important ;font-weight: 600;">DashBoard</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in " aria-labelledby="userDropdown">
+                      <a class="dropdown-item" href="/profile">
+                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                        Profile
+                      </a>
+                    <a class="dropdown-item" href="/price-list"> <i class="fa fa-money fa-sm fa-fw mr-2 text-gray-400" aria-hidden="true"> </i> Price-list
+                    </a>
+                      
+                    <a class="dropdown-item" href="/rating"> <i class="fa fa-star fa-sm fa-fw mr-2 text-gray-400" aria-hidden="true"></i> Rating
+                    </a>
+                    
+                      
+                      <div class="dropdown-divider"></div>
+                   
+                 
+                     
+                     <form action="/logout" class="dropdown-item" method="post">
+                        <input type="hidden" name="_csrf" value="<%= csrfTokenss %>">
+            <button style="border: none;
+                             
+                            background: none;" type="submit"><i
+                    class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Logout</button>
+            </form>
+
+            </div>
+
+            </li>
+
+            <% } %>
+        </ul>
+    </nav>
+</header>
+
+
+<nav class="mobile-nav">
+    <ul class="mobile-nav__item-list">
+        <li class="mobile-nav__item">
+            <a class=" <%= path === '/g' ? 'active' : '' %>" href="/"><img class="imagess" src="/img/text0.JPG"
+                    width="150" height="20"></a>
+
+
+        </li>
+        <li class="mobile-nav__item">
+            <a class="<%= path === '/' ? 'active' : '' %>" href="/">Home</a>
+        </li>
+        <li class="mobile-nav__item">
+            <a class="<%= path === '/work' ? 'active' : '' %>" href="/how-its-work">How Its Work</a>
+        </li>
+
+        <% if (isAuthenticated) { %>
+
+        <li class="mobile-nav__item">
+            <a class="<%= path === '/selldoller' ? 'active' : '' %>" href="/selldoller">Sell Currency</a>
+
+        </li>
+        <li class="mobile-nav__item">
+            <a class="<%= path === '/buydoller' ? 'active' : '' %>" href="/buydoller">Buy Currency</a>
+        </li>
+
+        <% } %>
+
+        <% if (isAuthenticated) { %>
+
+        <li class="mobile-nav__item">
+            <a class="<%= path === 'order' ? 'active' : '' %>" href="/order">Orders</a>
+        </li>
+
+        <li class="mobile-nav__item">
+            <a class="<%= path === 'rating' ? 'active' : '' %>" href="/rating">Rating</a>
+
+        </li>
+        <li class="mobile-nav__item">
+            <a class="<%= path === 'price-list' ? 'active' : '' %>" href="/price-list">Price-list</a>
+
+        </li>
+
+        <% } %>
+        <% if (!isAuthenticated) { %>
+        <li class="mobile-nav__item">
+            <a class="<%= path === '/login' ? 'active' : '' %>" style="border:solid 2px red ;" href="/login">Login</a>
+        </li>
+        <li class="mobile-nav__item">
+            <a class="<%= path === '/signup' ? 'active' : '' %>" style="border:solid 2px red ;"
+                href="/signup">Signup</a>
+        </li>
+        <% } else { %>
+        <li class="mobile-nav__item">
+            <form action="/logout" method="post">
+                <input type="hidden" name="_csrf" value="<%= csrfTokenss %>">
+                <button type="submit">Logout</button>
+            </form>
+        </li>
+        <% } %>
+    </ul>
+</nav>

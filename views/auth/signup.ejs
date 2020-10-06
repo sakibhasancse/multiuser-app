@@ -1,0 +1,75 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/forms.css">
+<link rel="stylesheet" href="/css/auth.css">
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                    <% if (errorMessage) { %>
+                    <div class="user-message user-message--error"><%= errorMessage %></div>
+                    <% } %>
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Sign In</h5>
+
+                        <form class=" form-signin" action="/signup" method="POST" >
+                            <div class="form-label-group">
+                               
+                                <input
+                                    class="form-control <%=validationError.find(e=> e.param === 'name')?'invalid' : '' %> "
+                                    type="text" required placeholder="Name" name="name" id="name" value="<%=oldInput.name%>">
+                            </div>
+                            <div class="form-label-group">
+                                
+                                <input
+                                    class="form-control <%=validationError.find(e=> e.param === 'phone')?'invalid' : '' %> "
+                                    type="text" required name="phone" placeholder="Phone Number" id="phone" value="<%=oldInput.phone%>">
+                            </div>
+                            <div class="form-label-group">
+                                
+                                <input
+                                    class="form-control <%=validationError.find(e=> e.param === 'address')?'invalid' : '' %> "
+                                    type="text"required name="address" placeholder="Address" id="address" value="<%=oldInput.address%>">
+                            </div>
+                            <div class="form-label-group">
+                               
+                                <input
+                                    class="form-control <%=validationError.find(e=> e.param === 'zip')?'invalid' : '' %> "
+                                    type="text" required name="zip" id="zip" placeholder="Address And Zip" value="<%=oldInput.zip%>">
+                            </div>
+
+                            <div class="form-label-group">
+                               
+
+                                <input type="email"
+                                    class="form-control <%=validationError.find(e=> e.param === 'email')?'invalid' : '' %> "
+                                    name="email" required id="email" value="<%=oldInput.email%>" placeholder="Email">
+                            </div>
+                            <div class="form-label-group">
+                               
+                                <input type="password"
+                                    class="form-control <%=validationError.find(e=> e.param === 'password')?'invalid' : '' %> "
+                                    name="password" required id="password" value="<%=oldInput.password%>" placeholder="Password">
+                            </div>
+                            <div class="form-label-group">
+                          
+                                <input type="password" name="confirmPassword" placeholder="Confirm Password"
+                                    class="form-control <%=validationError.find(e=> e.param === 'confirmPassword')?'invalid' : '' %> "
+                                    id="confirmPassword" required value="<%=oldInput.confirmPassword%>">
+                            </div>
+                            <input type="hidden" name="_csrf" value="<%=csrfTokenss %>">
+
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign
+                                in</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../includes/end.ejs') %>
